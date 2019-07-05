@@ -1,0 +1,10 @@
+{
+    "manver" : "1",
+    "project" : "Test-project",
+    "description" : "Test project for vscode extension",
+    "version" : "0.0.1",
+    "license" : "MIT",
+    "author" : "kobbled",
+    "environment" : "./vars.tpp",
+    "ftp"    : "127.0.0.1"
+  }

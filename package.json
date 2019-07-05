@@ -1,0 +1,77 @@
+{
+    "name": "fanuc-tp-plus",
+    "displayName": "Fanuc TP-Plus Language",
+    "description": "Syntax Highlighting for Onerobotics TP-Plus Language",
+    "version": "0.0.1",
+    "publisher": "kobbled",
+    "engines": {
+        "vscode": "^1.35.0"
+    },
+    "categories": [
+        "Programming Languages",
+        "Themes",
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:tpp.execInTerminal",
+        "onCommand:tpp.execInTerminalWithEnv",
+        "onCommand:tpp.sendtorobot"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "languages": [
+            {
+                "id": "tpp",
+                "aliases": [
+                    "TP-Plus",
+                    "tpp"
+                ],
+                "extensions": [
+                    ".tpp"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "tpp",
+                "scopeName": "source.tpp",
+                "path": "./syntaxes/tpp.tmLanguage.json"
+            }
+        ],
+        "themes": [
+            {
+                "label": "tpp-vs-dark",
+                "uiTheme": "vs-dark",
+                "path": "./themes/tpp-vs-dark.json"
+            }
+        ],
+        "commands": [
+            {
+                "command": "tpp.execInTerminal",
+                "title": "Interpret TPP"
+            },
+            {
+                "command": "tpp.execInTerminalWithEnv",
+                "title": "Interpret TPP with environment"
+            },
+            {
+                "command": "tpp.sendtorobot",
+                "title": "Send LS files to robot"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "lint": "tslint -p ./"
+    },
+    "devDependencies": {
+        "js-yaml": "^3.13.1",
+        "@types/node": "^10.12.21",
+        "@types/vscode": "^1.33.0",
+        "typescript": "^3.3.1",
+        "tslint": "^5.12.1"
+    }
+}

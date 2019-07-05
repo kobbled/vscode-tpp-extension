@@ -1,0 +1,5 @@
+anon
+bin
+prompt
+mput *.ls
+quit
