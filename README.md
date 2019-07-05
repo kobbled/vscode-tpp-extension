@@ -10,8 +10,8 @@ This is a syntax highlighter for the [TP+ abstraction language](https://github.c
 A special color theme was created for viewing TP+ files called **tpp-vs-dark**.
 
 <p float="left">
-  <img src="img/theme01.PNG" width="36%" />
-  <img src="img/theme02.PNG" width="41%" /> 
+  <img src="https://raw.githubusercontent.com/kobbled/vscode-tpp-extension/master/img/theme01.PNG" width="36%" />
+  <img src="https://raw.githubusercontent.com/kobbled/vscode-tpp-extension/master/img/theme02.PNG" width="41%" /> 
 </p>
 
 ### extension commands
