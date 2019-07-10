@@ -11,7 +11,13 @@ export function activate(context: vscode.ExtensionContext) {
     // tpp compile in terminal using environment variable file specified in package.json
     context.subscriptions.push(vscode.commands.registerCommand('tpp.execInTerminalWithEnv', execInTerminalEnv));
     // send all ls files to ftp ip specified in package.json
-    context.subscriptions.push(vscode.commands.registerCommand('tpp.sendtorobot', sendls2ftp));
+    context.subscriptions.push(vscode.commands.registerCommand('tpp.sendtorobot', () => {
+        sendls2ftp(true);
+    }));
+    // send current file to ftp ip specified in package.json
+    context.subscriptions.push(vscode.commands.registerCommand('tpp.sendsingle2robot', () => {
+        sendls2ftp(false);
+    }));
 }
 
 //ref: https://github.com/DonJayamanne/pythonVSCode/commit/97d4fc19624aeb0be67606e95ac705d6b71f6c91 
@@ -91,13 +97,17 @@ function execInTerminalEnv() {
 
 }
 
-function sendls2ftp() {
+function sendls2ftp(sendAll: boolean) {
     //retrieve path information about current file
     let filedict:any = currentFilePath();
 
     let ftpCmds:string = 'ftpcmds.txt';
     //create run file used for sending commands to ftp
-    createftpFile(filedict.folder + '\\ls', ftpCmds);
+    if (sendAll){
+        createftpFile(filedict.folder + '\\ls', ftpCmds);
+    } else {
+        createftpFile(filedict.folder + '\\ls', ftpCmds, filedict.lsName);
+    }
 
     //import filesystem module to read package.json
     const fs = require('fs');
@@ -186,16 +196,22 @@ function currentFilePath(){
     //create file path to store .ls files.
     //store in /ls subdir
     //replace '.tpp' with '.ls'
-    filedict.lsPath = filedict.folder + '\\ls\\' + filedict.filename.replace(/\.[^/.]+$/, ".ls");
+    filedict.lsName = filedict.filename.replace(/\.[^/.]+$/, ".ls");
+    filedict.lsPath = filedict.folder + '\\ls\\' + filedict.lsName;
     
 
     return filedict;
 }
 
-function createftpFile(directory: string, filename: string){
+function createftpFile(directory: string, filename: string, lsFile:string = ""){
     const fs = require('fs');
 
-    let text = 'anon\r\nbin\r\nprompt\r\nmput *.ls\r\nquit';
+    let text = "";
+    if (lsFile === ""){
+        text = `anon\r\nbin\r\nprompt\r\nmput *.ls\r\nquit`;
+    } else {
+        text = `anon\r\nbin\r\nprompt\r\nput ${lsFile} \r\nquit`;
+    }
     let path: string = directory + "\\" + filename;
 
     fs.writeFileSync(path, text, (err) => {  

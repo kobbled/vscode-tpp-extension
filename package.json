@@ -16,7 +16,8 @@
     "activationEvents": [
         "onCommand:tpp.execInTerminal",
         "onCommand:tpp.execInTerminalWithEnv",
-        "onCommand:tpp.sendtorobot"
+        "onCommand:tpp.sendtorobot",
+        "onCommand:tpp.sendsingle2robot"
     ],
     "main": "./out/extension.js",
     "contributes": {
@@ -59,6 +60,10 @@
             {
                 "command": "tpp.sendtorobot",
                 "title": "Send LS files to robot"
+            },
+            {
+                "command": "tpp.sendsingle2robot",
+                "title": "Send current LS file to robot"
             }
         ]
     },

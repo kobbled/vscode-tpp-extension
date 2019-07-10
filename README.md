@@ -24,6 +24,8 @@ A special color theme was created for viewing TP+ files called **tpp-vs-dark**.
   * same as 'Interpret TPP' but requires an environment variable file (i.e. "tpp file.tpp -o file.ls -e env.tpp"). This varible file is declared in a *package.json* file in the **same** directory as the .tpp file being interpreted.
 * Send LS files to robot
   * sends all *.ls* files in the subdirectory **./ls** to the robots ftp address defined in *package.json*.
+* Send current LS file to robot
+  * sends *.ls* file of the tpp file currently active to the robots ftp address defined in *package.json*.
 
 ------
 
