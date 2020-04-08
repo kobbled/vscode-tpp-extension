@@ -1,6 +1,7 @@
 *.code-workspace
 .git/
 colors/
+.vscode
 out
 node_modules
 vsc-extension-quickstart.md

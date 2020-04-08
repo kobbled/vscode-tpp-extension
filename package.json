@@ -2,7 +2,7 @@
     "name": "fanuc-tp-plus",
     "displayName": "Fanuc TP-Plus Language",
     "description": "Syntax Highlighting for Onerobotics TP-Plus Language",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "publisher": "kobbled",
     "repository": "https://github.com/kobbled/vscode-tpp-extension",
     "engines": {
@@ -51,19 +51,19 @@
         "commands": [
             {
                 "command": "tpp.execInTerminal",
-                "title": "Interpret TPP"
+                "title": "TPP: Interpret TPP"
             },
             {
                 "command": "tpp.execInTerminalWithEnv",
-                "title": "Interpret TPP with environment"
+                "title": "TPP: Interpret TPP with environment"
             },
             {
                 "command": "tpp.sendtorobot",
-                "title": "Send LS files to robot"
+                "title": "TPP: Send LS files to robot"
             },
             {
                 "command": "tpp.sendsingle2robot",
-                "title": "Send current LS file to robot"
+                "title": "TPP: Send current LS file to robot"
             }
         ]
     },
