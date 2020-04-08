@@ -6,7 +6,7 @@
     "publisher": "kobbled",
     "repository": "https://github.com/kobbled/vscode-tpp-extension",
     "engines": {
-        "vscode": "^1.35.0"
+        "vscode": "^1.43.0"
     },
     "categories": [
         "Programming Languages",
