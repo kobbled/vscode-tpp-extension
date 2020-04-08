@@ -74,10 +74,10 @@
         "lint": "tslint -p ./"
     },
     "devDependencies": {
+        "@types/node": "^10.17.18",
+        "@types/vscode": "^1.43.0",
         "js-yaml": "^3.13.1",
-        "@types/node": "^10.12.21",
-        "@types/vscode": "^1.33.0",
-        "typescript": "^3.3.1",
-        "tslint": "^5.12.1"
+        "tslint": "^5.20.1",
+        "typescript": "^3.8.3"
     }
 }
