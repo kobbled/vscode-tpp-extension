@@ -1,7 +1,7 @@
 
 # Fanuc TP-Plus Language Syntax Highlighter
 
-This is a syntax highlighter for the [TP+ abstraction language](https://github.com/onerobotics/tp_plus) for Fanuc robot controllers written by onerobotics.
+This is a syntax highlighter for the [TP+ abstraction language](https://github.com/kobbled/tp_plus) for Fanuc robot controllers written by onerobotics.
 
 ## Features
 
@@ -61,7 +61,7 @@ P1_data/
 ## Requirements
 
 - This package depends on on The TP+ abstraction language which can be downloaded at:
-https://github.com/onerobotics/tp_plus
+https://github.com/kobbled/tp_plus
 
 - Make sure that the gem installs correctly, the ruby bin is in your PATH variables, and 'tpp' can be invoked from the terminal. Extension commands will use the integrated terminal in vscode and use the 'tpp' command.
 
