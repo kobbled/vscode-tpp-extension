@@ -37,11 +37,11 @@
         },
         {
           "name": "keyword.control.clause.tpp",
-          "match": "\\b(eval|when|in|\\sto\\s|jump_to|run|raise)\\b"
+          "match": "\\b(eval|when|in|\\sto\\s|jump_to|run|raise|warning|message)\\b"
         },
         {
           "name": "keyword.control.conditional.tpp",
-          "match": "\\b(if|else|end|case|unless|position_data|namespace)\\b"
+          "match": "\\b(if|elsif|else|end|case|unless|position_data|namespace)\\b"
         },
         {
           "name": "keyword.control.repeat.tpp",

@@ -133,9 +133,9 @@ P[1:""]{
    GP1:
   UF : 1, UT : 1,  CONFIG : 'F U T, 0, 0, 0',
   X = 0.0 mm, Y = 0.0 mm, Z = 0.0 mm,
-  W = 0.0 deg, P = 0.0 deg, R = 0.0 deg   GP2:
+  W = 0.0 deg, P = 0.0 deg, R = 0.0 deg
+   GP2:
   UF : 1, UT : 1, 
-	J[:J1, 0.0] = 0 deg
-
+  J1 = 0.0 deg
 };
 /END
