@@ -155,7 +155,16 @@
         },
         {
           "comment": "meta.modifiers.tpp",
-          "match": "(?!\\.\\s*)\\b(skip_to|term|from|to|at|time_after|time_before|timeout_to|offset|tool_offset|vision_offset)\\b(?=\\(.*\\))(?![\\.\\s])",
+          "match": "(?!\\.\\s*)\\b(skip_to|term|acc|from|to|at|time_after|time_before|timeout_to|offset|tool_offset|vision_offset)\\b(?=\\(.*\\))(?![\\.\\s])",
+          "captures": {
+            "1": {
+              "name": "keyword.other.modifiers.tpp"
+            }
+          }
+        },
+        {
+          "comment": "meta.modifiers.tpp",
+          "match": "(?!\\.\\s*)\\b(coord|pth|increment|minimal_rotation|wrist_joint|break)\\b",
           "captures": {
             "1": {
               "name": "keyword.other.modifiers.tpp"
