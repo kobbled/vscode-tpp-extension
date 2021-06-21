@@ -41,7 +41,7 @@
         },
         {
           "name": "keyword.control.conditional.tpp",
-          "match": "\\b(if|elsif|else|end|case|unless|position_data|namespace)\\b"
+          "match": "\\b(if|then|elsif|else|end|case|unless|position_data|namespace)\\b"
         },
         {
           "name": "keyword.control.repeat.tpp",
