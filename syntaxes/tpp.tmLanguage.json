@@ -85,7 +85,7 @@
         },
         {
           "name": "keyword.other.frame.tpp",
-          "match": "\\b(set_uframe|use_payload|use_uframe|use_utool)\\b"
+          "match": "\\b(set_uframe|use_payload|use_uframe|use_utool|use_override|use_colguard)\\b"
         },
         {
           "name": "storage.type.label.tpp",
