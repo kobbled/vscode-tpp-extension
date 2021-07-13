@@ -85,7 +85,7 @@
         },
         {
           "name": "keyword.other.frame.tpp",
-          "match": "\\b(set_uframe|use_payload|use_uframe|use_utool)\\b"
+          "match": "\\b(set_uframe|use_payload|use_uframe|use_utool|use_override)\\b"
         },
         {
           "name": "storage.type.label.tpp",
@@ -177,7 +177,7 @@
       "patterns": [
         {
           "name": "support.class.action.tpp",
-          "match": "\\b(turn_on|turn_off|toggle|pulse|start|stop|reset|restart|set_skip_condition)\\b"
+          "match": "\\b(turn_on|turn_off|toggle|pulse|start|stop|reset|restart|set_skip_condition|colguard_on|colguard_off|adjust_colguard)\\b"
         },
         {
           "name": "support.function.statement.tpp",
