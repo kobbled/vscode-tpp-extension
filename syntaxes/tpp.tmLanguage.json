@@ -45,7 +45,7 @@
         },
         {
           "name": "keyword.control.repeat.tpp",
-          "match": "\\b(while|end|for)\\b"
+          "match": "\\b(while|end|for|def)\\b"
         },
         {
           "name": "keyword.operator.assignment.tpp",
@@ -175,10 +175,6 @@
     },
     "support": {
       "patterns": [
-        {
-          "name": "support.function.tpp",
-          "match": "\\b(def)\\b"
-        },
         {
           "name": "support.class.action.tpp",
           "match": "\\b(turn_on|turn_off|toggle|pulse|start|stop|reset|restart|set_skip_condition|colguard_on|colguard_off|adjust_colguard)\\b"
