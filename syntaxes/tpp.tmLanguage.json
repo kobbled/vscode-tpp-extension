@@ -37,7 +37,7 @@
         },
         {
           "name": "keyword.control.clause.tpp",
-          "match": "\\b(eval|when|in|\\sto\\s|jump_to|run|raise|warning|message)\\b"
+          "match": "\\b(eval|when|in|\\sto\\s|jump_to|run|raise|warning|message|return)\\b"
         },
         {
           "name": "keyword.control.conditional.tpp",
@@ -164,7 +164,7 @@
         },
         {
           "comment": "meta.modifiers.tpp",
-          "match": "(?!\\.\\s*)\\b(coord|pth|increment|minimal_rotation|wrist_joint|break)\\b",
+          "match": "(?!\\.\\s*)\\b(coord|pth|increment|minimal_rotation|wrist_joint|break|minimal_rotation|rtcp|cd|corner_region|simultaneous_ev|independent_ev|process_speed|continuous_rotation_speed|approach_ld|retract_ld|mrot)\\b",
           "captures": {
             "1": {
               "name": "keyword.other.modifiers.tpp"
@@ -175,6 +175,10 @@
     },
     "support": {
       "patterns": [
+        {
+          "name": "support.function.tpp",
+          "match": "\\b(def)\\b"
+        },
         {
           "name": "support.class.action.tpp",
           "match": "\\b(turn_on|turn_off|toggle|pulse|start|stop|reset|restart|set_skip_condition|colguard_on|colguard_off|adjust_colguard)\\b"
@@ -194,6 +198,10 @@
         {
           "name": "constant.numeric",
           "match": "(?<=[\\s|\\(|\\)|\\+|\\-|\\*|\\/|DIV|\\%|<|<=|==|<>|>=|>|:=|=|::])(-?\\d*\\.?\\d+)"
+        },
+        {
+          "name": "constant.other.symbol.tpp",
+          "match": "\\b(numreg|posreg|argreg|strreg)"
         }
       ]
     },
