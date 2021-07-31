@@ -1,0 +1,221 @@
+{
+  "name": "TP-Plus",
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "patterns": [
+    {
+      "include": "#directive"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#variables"
+    },
+    {
+      "include": "#motion"
+    },
+    {
+      "include": "#support"
+    },
+    {
+      "include": "#comment"
+    },
+    {
+      "include": "#strings"
+    }
+  ],
+  "repository": {
+    "directive": {
+      "name": "punctuation.definition.tag.directive.tpp",
+      "match": "%[a-zA-Z]+"
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.storage.header.tpp",
+          "match": "\\b(TP_IGNORE_PAUSE|TP_COMMENT|TP_GROUPMASK|TP_SUBTYPE)\\b"
+        },
+        {
+          "name": "keyword.control.clause.tpp",
+          "match": "\\b(eval|when|in|\\sto\\s|jump_to|run|raise|warning|message|return)\\b"
+        },
+        {
+          "name": "keyword.control.conditional.tpp",
+          "match": "\\b(if|then|elsif|else|end|case|unless|position_data|namespace)\\b"
+        },
+        {
+          "name": "keyword.control.repeat.tpp",
+          "match": "\\b(while|end|for|def)\\b"
+        },
+        {
+          "name": "keyword.operator.assignment.tpp",
+          "match": "(:=|=|::)"
+        },
+        {
+          "name": "keyword.operator.arithmetic.tpp",
+          "match": "(\\+|\\-|\\*|\\/|DIV|\\%)"
+        },
+        {
+          "name": "keyword.operator.relational.tpp",
+          "match": "(<|<=|==|<>|>=|>)"
+        },
+        {
+          "name": "keyword.operator.boolean.tpp keyword.control.boolean.tpp",
+          "match": "\\b(&&|\\|\\||!)\\b"
+        },
+        {
+          "name": "keyword.operator.boolean.tpp",
+          "match": "(&&|\\|\\||!)"
+        },
+        {
+          "comment": "meta.unit.tpp",
+          "match": "([\\d*\\.?\\d+]|\\w+)(?:\\s*)(?:\\,)(?:\\s*)('(?:%|mm|deg|cm|m|mm|s)(?:\\s*)(?:\\/)?(?:\\s*)(?:min|s)?')",
+          "captures": {
+            "1": {
+              "name": "constant.character.tpp"
+            },
+            "2": {
+              "name": "keyword.other.unit.tpp"
+            }
+          }
+        },
+        {
+          "name": "keyword.operator.special.tpp",
+          "match": "\\b(>=<|:|@)\\b"
+        },
+        {
+          "name": "keyword.other.frame.tpp",
+          "match": "\\b(set_uframe|use_payload|use_uframe|use_utool|use_override)\\b"
+        },
+        {
+          "name": "storage.type.label.tpp",
+          "match": "(@\\w+)"
+        },
+        {
+          "name": "support.variable.bool.tpp",
+          "match": "(true|false)"
+        },
+        {
+          "name": "support.function.call.tpp",
+          "match": "(?:[\\n\\r\\t]\\s*)(?!\\.)(\\w+)(?=\\(.*\\))"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "comment": "meta.variable.IO.tpp",
+          "match": "(\\b(?:D?R?A?G?U?S?(?:I|O))\\b(?:\\[[0-9]+\\]))",
+          "captures": {
+            "1": {
+              "name": "variable.language.type.tpp"
+            },
+            "2": {
+              "name": "variable.other.address.tpp"
+            }
+          }
+        },
+        {
+          "comment": "meta.variable.register.tpp",
+          "match": "(\\b(?:P|R|PR|VR|AR|SR|F|UALM|UFRAME|UTOOL|TIMER)\\b(?:\\[[0-9]+\\]))",
+          "captures": {
+            "1": {
+              "name": "variable.language.type.tpp"
+            }
+          }
+        },
+        {
+          "comment": "meta.variable.modifiers.tpp",
+          "match": "(?:\\w+)\\.\\b(group)\\b\\(\\d\\)\\.([a-zA-Z])",
+          "captures": {
+            "1": {
+              "name": "support.type.group.tpp"
+            },
+            "2": {
+              "name": "support.varaible.axis.tpp"
+            }
+          }
+        },
+        {
+          "comment": "meta.variable.modifiers.tpp",
+          "match": "(?:\\w+)\\.([a-zA-Z](?:\\s|=))",
+          "captures": {
+            "1": {
+              "name": "support.varaible.axis.tpp"
+            }
+          }
+        }
+      ]
+    },
+    "motion": {
+      "patterns": [
+        {
+          "name": "support.function.motion.tpp",
+          "match": "\\b(circular_move|joint_move|linear_move)\\b"
+        },
+        {
+          "comment": "meta.modifiers.tpp",
+          "match": "(?!\\.\\s*)\\b(skip_to|term|acc|from|to|at|time_after|time_before|timeout_to|offset|tool_offset|vision_offset)\\b(?=\\(.*\\))(?![\\.\\s])",
+          "captures": {
+            "1": {
+              "name": "keyword.other.modifiers.tpp"
+            }
+          }
+        },
+        {
+          "comment": "meta.modifiers.tpp",
+          "match": "(?!\\.\\s*)\\b(coord|pth|increment|minimal_rotation|wrist_joint|break|minimal_rotation|rtcp|cd|corner_region|simultaneous_ev|independent_ev|process_speed|continuous_rotation_speed|approach_ld|retract_ld|mrot)\\b",
+          "captures": {
+            "1": {
+              "name": "keyword.other.modifiers.tpp"
+            }
+          }
+        }
+      ]
+    },
+    "support": {
+      "patterns": [
+        {
+          "name": "support.class.action.tpp",
+          "match": "\\b(turn_on|turn_off|toggle|pulse|start|stop|reset|restart|set_skip_condition|colguard_on|colguard_off|adjust_colguard)\\b"
+        },
+        {
+          "name": "support.function.statement.tpp",
+          "match": "\\b(wait_for|wait_until)\\b"
+        },
+        {
+          "name": "support.type.tpp",
+          "match": "\\b(get_linear_position|get_joint_position|indirect)\\b"
+        },
+        {
+          "name": "constant.language",
+          "match": "\\b([A-Z_]+[0-9]*)\\b"
+        },
+        {
+          "name": "constant.numeric",
+          "match": "(?<=[\\s|\\(|\\)|\\+|\\-|\\*|\\/|DIV|\\%|<|<=|==|<>|>=|>|:=|=|::])(-?\\d*\\.?\\d+)"
+        },
+        {
+          "name": "constant.other.symbol.tpp",
+          "match": "\\b(numreg|posreg|argreg|strreg)"
+        }
+      ]
+    },
+    "comment": {
+      "name": "comment.line.number-sign.tpp",
+      "begin": "(#)",
+      "end": "(\\n)"
+    },
+    "strings": {
+      "name": "string.quoted.double.tpp",
+      "match": "(?:'|\").*(?:'|\")",
+      "patterns": [
+        {
+          "name": "constant.character.escape.tpp",
+          "match": "\\\\."
+        }
+      ]
+    }
+  },
+  "scopeName": "source.tpp"
+}

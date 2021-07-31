@@ -5,6 +5,9 @@ This is a syntax highlighter for the [TP+ abstraction language](https://github.c
 
 ## Features
 
+**..warning::** As of v0.1.4 syntax highlighter will import the ruby syntax highlighter. You may have to download the Ruby vscode extension
+for this to work.
+
 ### color theme
 
 A special color theme was created for viewing TP+ files called **tpp-vs-dark**.
