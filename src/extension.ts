@@ -102,46 +102,33 @@ function sendls2ftp(sendAll: boolean) {
     let filedict:any = currentFilePath();
 
     let ftpCmds:string = 'ftpcmds.txt';
-    //create run file used for sending commands to ftp
-    if (sendAll){
-        createftpFile(filedict.folder + '\\ls', ftpCmds);
-    } else {
-        createftpFile(filedict.folder + '\\ls', ftpCmds, filedict.lsName);
-    }
-
+    
     //import filesystem module to read package.json
     const fs = require('fs');
-    //import util for promisify functionality
-    const util = require('util');
 
-    //use promisfy to read file and put into a promise
-    const readFile = util.promisify(fs.readFile);
+    try {
+        const jsonText = fs.readFileSync(filedict.folder + '\\package.json', {encoding: 'utf8'});
+        const pckg = JSON.parse(jsonText);
 
-    readFile(filedict.folder + '\\package.json', {encoding: 'utf8'})
-    .then((text) => {
-        let pckg = JSON.parse(text);
+        //create run file used for sending commands to ftp
+        if (sendAll){
+            createftpFile(filedict.folder + '\\ls', ftpCmds, pckg.ftp, pckg.port ?? 21);
+        } else {
+            createftpFile(filedict.folder + '\\ls', ftpCmds, pckg.ftp, pckg.port ?? 21, filedict.lsName);
+        }
 
-        //create a terminal window in vscode called "Ext Terminal"
         const terminal = (<any>vscode.window).createTerminal(`Ext Terminal`);
-
-        //settimout for terminal to load before sending text
-        setTimeout(() => {
-            if (ensureTerminalExists()) {
-                //cd into folder
-                terminal.sendText(`cd "${filedict.folder}\\ls"`);
-                //run ftp to robot
-                terminal.sendText(`ftp -s:${ftpCmds} ${pckg.ftp}`);
-                //force show the terminal
-                terminal.show();
-            }
-        }, 1000);
-
-
-    })
-    .catch((err) => {
-        console.log('ERROR:', err);
-    });
-
+        if (ensureTerminalExists()) {
+            //cd into folder
+            terminal.sendText(`cd "${filedict.folder}\\ls"`);
+            //run ftp to robot
+            terminal.sendText(`ftp -s:${ftpCmds}`);
+            //force show the terminal
+            terminal.show();
+        }
+    } catch (err) {
+        console.error(err);
+    }
 }
 
 //ref: https://github.com/microsoft/vscode-extension-samples/blob/master/terminal-sample/src/extension.ts
@@ -203,15 +190,22 @@ function currentFilePath(){
     return filedict;
 }
 
-function createftpFile(directory: string, filename: string, lsFile:string = ""){
+function createftpFile(directory: string, filename: string, host: string, port: number = 21, lsFile:string = ""){
     const fs = require('fs');
 
-    let text = "";
+    const lineEnd = `\r\n`;
+    let text = 
+    `open ${host} ${port}${lineEnd}` + 
+    `anon${lineEnd}` +
+    `bin${lineEnd}` +
+    `prompt${lineEnd}`;
+
     if (lsFile === ""){
-        text = `anon\r\nbin\r\nprompt\r\nmput *.ls\r\nquit`;
+        text += `mput *.ls`;
     } else {
-        text = `anon\r\nbin\r\nprompt\r\nput ${lsFile} \r\nquit`;
+        text += `put ${lsFile}`;
     }
+    text += `${lineEnd}quit`;
     let path: string = directory + "\\" + filename;
 
     fs.writeFileSync(path, text, (err) => {  
