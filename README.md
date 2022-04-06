@@ -42,11 +42,14 @@ In order to use the extension commands a *package.json* file should be created i
     "license" : "MIT",
     "author" : "kobbled",
     "environment" : "./vars.tpp",
-    "ftp"    : "127.0.0.1"
+    "ftp"    : "127.0.0.1",
+    "includes" : ["../frames", "../poses"]
 }
 ```
 
 The extension relies on the keys *"environment"*, and *"ftp"* to be properly set in order to use all of the commands.
+
+If your TP+ uses `import` statements if the file being imported is not in the working directory of the *pacakge.json* file, the folder which it resides must be specified in the *pacakge.json* with an *"includes"* key.
 
 The file structure of the tpp files, the package.json file, variable files, and their translated *.ls* files should be as follows:
 ```
