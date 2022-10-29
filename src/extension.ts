@@ -99,6 +99,9 @@ function execInTerminalEnv() {
                 terminal.sendText(`cd "${filedict.folder}"`);
                 //send tpp compile command
                 let tpp_cml = `tpp "${filedict.fullPath}" -o "${filedict.lsPath}" -e "${pckg.environment}"`;
+                if (pckg.karel != null) {
+                  tpp_cml = tpp_cml + ` -k "${pckg.karel}"`
+                }
                 if (includes != null) {
                   for (var i in includes) {
                     tpp_cml = tpp_cml + ` -i "${includes[i]}"`
