@@ -43,7 +43,7 @@ In order to use the extension commands a *package.json* file should be created i
     "author" : "kobbled",
     "environment" : "./vars.tpp",
     "ftp"    : "127.0.0.1",
-    "karel" : "tppenv",
+    "karel" : {"name" : "tppenv", "clear" : false},
     "includes" : ["../frames", "../poses"]
 }
 ```
