@@ -100,7 +100,11 @@ function execInTerminalEnv() {
                 //send tpp compile command
                 let tpp_cml = `tpp "${filedict.fullPath}" -o "${filedict.lsPath}" -e "${pckg.environment}"`;
                 if (pckg.karel != null) {
-                  tpp_cml = tpp_cml + ` -k "${pckg.karel["name"]}, ${pckg.karel["clear"]}"`
+                  if (pckg.karel.has("config")) {
+                    tpp_cml = tpp_cml + ` -k "${pckg.karel["name"]}, ${pckg.karel["clear"]}, ${pckg.karel["config"]}"`
+                  } else {
+                    tpp_cml = tpp_cml + ` -k "${pckg.karel["name"]}, ${pckg.karel["clear"]}"`
+                  }
                 }
                 if (includes != null) {
                   for (var i in includes) {
