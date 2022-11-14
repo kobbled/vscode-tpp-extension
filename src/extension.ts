@@ -89,6 +89,8 @@ function execInTerminalEnv() {
 
         const includes = pckg.includes;
 
+        const macros = pckg.macros;
+
         //create a terminal window in vscode called "Ext Terminal"
         const terminal = (<any>vscode.window).createTerminal(`Ext Terminal`);
 
@@ -110,6 +112,11 @@ function execInTerminalEnv() {
                   for (var i in includes) {
                     tpp_cml = tpp_cml + ` -i "${includes[i]}"`
                   }
+                }
+                if (macros != null) {
+                    for (var i in macros) {
+                      tpp_cml = tpp_cml + ` -m "${macros[i]}"`
+                    }
                 }
                 terminal.sendText(tpp_cml);
                 //force show the terminal

@@ -44,7 +44,8 @@ In order to use the extension commands a *package.json* file should be created i
     "environment" : "./vars.tpp",
     "ftp"    : "127.0.0.1",
     "karel" : {"name" : "hash_filename", "clear" : false, "config" : "rossum_config_filename"},
-    "includes" : ["../frames", "../poses"]
+    "includes" : ["../frames", "../poses"],
+    "macros" : ["DEBUG=true", "LOG=false"]
 }
 ```
 
