@@ -7,5 +7,6 @@
     "author" : "kobbled",
     "environment" : "./vars.tpp",
     "ftp"    : "127.0.0.1",
+    "port"   : "21",
     "includes" : ["./imp1", "./imp2"]
   }
