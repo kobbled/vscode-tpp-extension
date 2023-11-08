@@ -28,21 +28,51 @@ function execInTerminal() {
     //retrieve path information about current file
     let filedict:any = currentFilePath();
 
-    //create a terminal window in vscode called "Ext Terminal"
-    const terminal = (<any>vscode.window).createTerminal(`Ext Terminal`);
+    //import filesystem module to read package.json
+    const fs = require('fs');
+    //import util for promisify functionality
+    const util = require('util');
 
-    //settimout for terminal to load before sending text
-    setTimeout(() => {
-        if (ensureTerminalExists()) {
-            //cd into folder
-            terminal.sendText(`cd "${filedict.folder}"`);
-            //send tpp compile command
-            terminal.sendText(`tpp "${filedict.fullPath}" -o "${filedict.lsPath}"`);
-            //force show the terminal
-            terminal.show();
-        }
-    }, 1000);
+    //use promisfy to read file and put into a promise
+    const readFile = util.promisify(fs.readFile);
 
+    readFile(filedict.folder + '\\package.json', {encoding: 'utf8'})
+    .then((text) => {
+        let pckg = JSON.parse(text);
+
+        const includes = pckg.includes;
+
+        const macros = pckg.macros;
+
+        //create a terminal window in vscode called "Ext Terminal"
+        const terminal = (<any>vscode.window).createTerminal(`Ext Terminal`);
+
+        //settimout for terminal to load before sending text
+        setTimeout(() => {
+            if (ensureTerminalExists()) {
+                //cd into folder
+                terminal.sendText(`cd "${filedict.folder}"`);
+                //send tpp compile command
+                let tpp_cml = `tpp "${filedict.fullPath}" -o "${filedict.lsPath}"`;
+                if (includes != null) {
+                  for (var i in includes) {
+                    tpp_cml = tpp_cml + ` -i "${includes[i]}"`
+                  }
+                }
+                if (macros != null) {
+                    for (var i in macros) {
+                      tpp_cml = tpp_cml + ` -m "${macros[i]}"`
+                    }
+                }
+                terminal.sendText(tpp_cml);
+                //force show the terminal
+                terminal.show();
+            }
+        }, 1000);
+    })
+    .catch((err) => {
+      console.log('ERROR:', err);
+    });
 }
 
 function execInTerminalEnv() {
@@ -60,40 +90,50 @@ function execInTerminalEnv() {
     //use promisfy to read file and put into a promise
     const readFile = util.promisify(fs.readFile);
 
-    //declare asyncronous function to read the json file.
-    async function getjson() {
-        return await readFile(filedict.folder + '\\package.json', function(err, data) {
-            return data ;
-        });
-    }
+    readFile(filedict.folder + '\\package.json', {encoding: 'utf8'})
+    .then((text) => {
+        let pckg = JSON.parse(text);
 
-    //once promise retrieves json file, parse the json
-    // into hash object. Return 'environment' key
-    let envPath = getjson().then(data => {
-        let envjson = JSON.parse(data);
-        return envjson.environment;
-    });
+        const includes = pckg.includes;
 
-    //create a terminal window in vscode called "Ext Terminal"
-    const terminal = (<any>vscode.window).createTerminal(`Ext Terminal`);
+        const macros = pckg.macros;
 
-    //settimout for terminal to load before sending text
-    setTimeout(() => {
-        if (ensureTerminalExists()) {
+        //create a terminal window in vscode called "Ext Terminal"
+        const terminal = (<any>vscode.window).createTerminal(`Ext Terminal`);
 
-            //retrieve the promise storing the 'evironment key
-            // in the variable 'envPath'
-            envPath.then(function(result){
-                //One promise is retrieved run terminal commands
+        //settimout for terminal to load before sending text
+        setTimeout(() => {
+            if (ensureTerminalExists()) {
                 //cd into folder
                 terminal.sendText(`cd "${filedict.folder}"`);
                 //send tpp compile command
-                terminal.sendText(`tpp "${filedict.fullPath}" -o "${filedict.lsPath}" -e "${result}"`);
+                let tpp_cml = `tpp "${filedict.fullPath}" -o "${filedict.lsPath}" -e "${pckg.environment}"`;
+                if (pckg.karel != null) {
+                  if (pckg.karel.has("config")) {
+                    tpp_cml = tpp_cml + ` -k "${pckg.karel["name"]}, ${pckg.karel["clear"]}, ${pckg.karel["config"]}"`
+                  } else {
+                    tpp_cml = tpp_cml + ` -k "${pckg.karel["name"]}, ${pckg.karel["clear"]}"`
+                  }
+                }
+                if (includes != null) {
+                  for (var i in includes) {
+                    tpp_cml = tpp_cml + ` -i "${includes[i]}"`
+                  }
+                }
+                if (macros != null) {
+                    for (var i in macros) {
+                      tpp_cml = tpp_cml + ` -m "${macros[i]}"`
+                    }
+                }
+                terminal.sendText(tpp_cml);
                 //force show the terminal
                 terminal.show();
-            });
-        }
-    }, 1000);
+            }
+        }, 1000);
+    })
+    .catch((err) => {
+      console.log('ERROR:', err);
+    });
 
 }
 
